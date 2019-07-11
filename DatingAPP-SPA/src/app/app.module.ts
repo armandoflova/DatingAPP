@@ -1,20 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ValoresComponent } from './valores/valores.component';
+
+import { NavbarComponent } from './Components/navbar/navbar.component';
+import { InicioComponent } from './Components/inicio/inicio.component';
+import { RegistroComponent } from './Components/registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ValoresComponent
+    NavbarComponent,
+    InicioComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
