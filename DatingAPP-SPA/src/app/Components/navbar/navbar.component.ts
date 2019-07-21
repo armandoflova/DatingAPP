@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/Servicios/auth.service';
+import { AlertasService } from 'src/app/Servicios/alertas.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,28 +14,30 @@ export class NavbarComponent implements OnInit {
      password: ''
    };
 
-  constructor(private authservicio: AuthService) { }
+  constructor(public authservicio: AuthService,
+              private alerta: AlertasService) { }
 
   ngOnInit() {
   }
   Login(form: NgForm){
-      this.authservicio.Login(this.model).subscribe(next=>{
-        console.log('Autenticacion Satisfactoria');
-       
-        
+      this.authservicio.Login(this.model).subscribe(next =>{
+      this.alerta.exito('Inicio sesión de manera exitosa'); 
       }, error=>{
-       console.log('error con la autenticación');
+       this.alerta.error(error.statusText);
+       console.log(error);
+       
        
       });
     
   }
 
-  Loggint(){
-    const token = localStorage.getItem('token');
-    return !!token;
-  }
+  // Loggint(){
+  //   const token = localStorage.getItem('token');
+  //   return !!token;
+  // }
 
   Logout(){
     localStorage.removeItem('token');
+    this.alerta.info('Se cerro su sesión');
     }
 }

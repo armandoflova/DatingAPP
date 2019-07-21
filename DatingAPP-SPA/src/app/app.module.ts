@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { InicioComponent } from './Components/inicio/inicio.component';
 import { RegistroComponent } from './Components/registro/registro.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { RegistroComponent } from './Components/registro/registro.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

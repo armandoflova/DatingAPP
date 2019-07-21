@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './Servicios/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'DatingAPP-SPA';
+export class AppComponent implements OnInit{
+  helper = new JwtHelperService();
+  constructor(private authservicio: AuthService){}
+
+  ngOnInit(){
+    const token = localStorage.getItem('token');
+    if(token){
+      this.authservicio.decoradorToken = this.helper.decodeToken(token);
+    }
+  }
 }

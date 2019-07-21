@@ -52,14 +52,16 @@ namespace DatingApp.API.Controllers
         {
             try{    
                 var usuarioRepo = await _repo.Login(usuariologin.Nombre.ToLower(), usuariologin.Password);
-            if (usuarioRepo == null)
-                return Unauthorized();
+            if (usuarioRepo == null){
+                    return Unauthorized();
+            }
+                
 
             var claims = new[]
             {
              new Claim(ClaimTypes.NameIdentifier, usuarioRepo.Id.ToString()),
              new Claim(ClaimTypes.Name , usuarioRepo.Nombre)
-         };
+             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_Config.GetSection("AppSettings:Token").Value));
 

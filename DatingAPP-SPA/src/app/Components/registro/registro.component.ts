@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Servicios/auth.service';
+import { AlertasService } from 'src/app/Servicios/alertas.service';
 
 @Component({
   selector: 'app-registro',
@@ -11,16 +12,17 @@ export class RegistroComponent implements OnInit {
     nombre: '',
     password: ''
   };
-  constructor(private Auth: AuthService) { }
+  constructor(private Auth: AuthService,
+              private alertas: AlertasService) { }
 
   ngOnInit() {
   }
 
   registro(){
     this.Auth.registrar(this.model).subscribe(() => {
-      console.log('Se registro de manera satisfactoria ');
+      this.alertas.exito('Se registro usuario de manera correcta');
     }, error =>{
-      console.log(error);
+      this.alertas.error(error);
     });
   }
 }
